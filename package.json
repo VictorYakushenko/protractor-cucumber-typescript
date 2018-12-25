@@ -24,12 +24,13 @@
   },
   "homepage": "https://github.com/VictorYakushenko/protractor-cucumber-typescript#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
     "@types/cucumber": "^4.0.4",
-    "@types/jasmine": "^3.3.5",
     "@types/node": "^10.12.18",
+    "chai": "^4.2.0",
     "cucumber": "^5.0.3",
-    "protractor": "^5.4.1",
     "cucumber-junit": "^1.7.1",
+    "protractor": "^5.4.1",
     "protractor-cucumber-framework": "^6.1.1",
     "webdriver-manager": "^12.1.0"
   }

@@ -3,7 +3,7 @@ export interface IEmployeeForm {
     employeeLastName: string
     hireDate: Date
     employeeTitle: string
-    employeeDepartment: Department
+    employeeDepartment: EmployeeDepartment
     performanceEvaluation: Rate
     overall: Rate
     moreDetails: String
@@ -11,7 +11,7 @@ export interface IEmployeeForm {
     supervisorLastName: String
 }
 
-export enum Department {
+export enum EmployeeDepartment {
     Marketing, 
     Sales, 
     Human, 

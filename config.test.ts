@@ -1,4 +1,5 @@
 import { browser, Config } from 'protractor';
+import { setDefaultTimeout } from 'cucumber';
 import { exec } from 'child_process';
 
 export let config: Config = {
@@ -8,11 +9,13 @@ export let config: Config = {
     'browserName': 'chrome'
   },
 
-  baseUrl: 'https://www.arkadium.com/',
+  baseUrl: 'https://www.formstack.com/',
   framework: 'custom',  
   frameworkPath: require.resolve('protractor-cucumber-framework'),  
   specs: ['./../src/features/**/*.feature'],  
+  
   cucumberOpts: {
+    setDefaultTimeout: 60000,
     compiler: "ts:ts-node/register",  
     format: "json:./cucumber_report.json",
     require: ["./../dist/src/features/**/*.js"], 

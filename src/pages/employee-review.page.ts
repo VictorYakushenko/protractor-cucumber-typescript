@@ -1,5 +1,6 @@
-import { $, ElementFinder, by } from "protractor";
+import { $, ElementFinder, by, browser } from "protractor";
 import { DateService } from "../services/date-service";
+import { EmployeeDepartment } from "../models/iemployee-form";
 
 export class EmployeeReviewPage {
     public employeeFirstName: ElementFinder
@@ -9,10 +10,10 @@ export class EmployeeReviewPage {
     public hireYear: ElementFinder
     public employeeTitle: ElementFinder
     public employeeDepartment: ElementFinder
-    public performanceEvaluation: ElementFinder
-    public overall: ElementFinder
+    public performanceEvaluationAttendenceVeryGood: ElementFinder
+    public overallVeryGood: ElementFinder
     public moreDetails: ElementFinder
-    public SupervisorFirstName: ElementFinder
+    public supervisorFirstName: ElementFinder
     public supervisorLastName: ElementFinder
     public clearSignature: ElementFinder
     public signature: ElementFinder
@@ -20,38 +21,46 @@ export class EmployeeReviewPage {
     private today: Date 
 
     constructor() {
-        //It is sample template ID's is not dynamic
-        this.employeeFirstName = $("input[type='email']");
-        this.employeeLastName = $("#gform_submit_button_3");
+        //It is sample template ID's and id is not dynamic
+        this.employeeFirstName = $("#field48323184-first");
+        this.employeeLastName = $("#field48323184-last");
         this.hireMonth = $("#field48323212M");
-        this.hireDate = $("input[type='email']");
-        this.hireYear = $("#gform_submit_button_3");
-        this.hireMonth = $(".validation_error");
-        this.employeeTitle = $("input[type='email']");
-        this.employeeDepartment = $("#gform_submit_button_3");
-        this.performanceEvaluation = $(".validation_error");
-        this.overall = $("input[type='email']");
-        this.moreDetails = $("#gform_submit_button_3");
-        this.SupervisorFirstName = $(".validation_error");
-        this.supervisorLastName = $("input[type='email']");
-        this.clearSignature = $("#gform_submit_button_3");
-        this.signature = $("#gform_submit_button_3");
-        this.submitFormBtn = $(".validation_error");
+        this.hireDate = $("#field48323212D");
+        this.hireYear = $("#field48323212Y");
+        this.employeeTitle = $("#field48323242");
+        this.employeeDepartment = $("#field48323246");
+        this.performanceEvaluationAttendenceVeryGood = $("input[value='Attendence = Very Good']");
+        this.overallVeryGood = $("input[value='Very good']");
+        this.moreDetails = $("#field48323422");
+        this.supervisorFirstName = $("#field48323416-first");
+        this.supervisorLastName = $("#field48323416-last");
+        this.clearSignature = $("#signatureClear48323419");
+        this.signature = $(".jSignature");
+        this.submitFormBtn = $("#fsSubmitButton2560208");
         this.today = new Date();
     }
 
-    public async selectEmployeeHireDate (date: Date): Promise<void>{
-        const year =  await DateService.getYearNumeric(this.today);
-        const month =  await DateService.getMonthShort(this.today);
-        const day =  await DateService.getDay2Digits(this.today);
+    public async selectEmployeeHireDate (date: Date = this.today): Promise<void>{
+        const year =  await DateService.getYearNumeric(date);
+        const month =  await DateService.getMonthShort(date);
+        const day =  await DateService.getDay2Digits(date);
 
         await this.hireMonth.click()
         await this.hireMonth.element(by.cssContainingText('option', month)).click()
 
-        await this.hireDate.click()
-        await this.hireDate.element(by.cssContainingText('option', day)).click()
+         await this.hireDate.click()
+         await this.hireDate.element(by.cssContainingText('option', day)).click()
 
-        await this.hireYear.click()
-        await this.hireYear.element(by.cssContainingText('option', year)).click()
+         await this.hireYear.click()
+         await this.hireYear.element(by.cssContainingText('option', year)).click()
+    }
+
+    public async sign (date: Date = this.today): Promise<void>{
+        browser.actions().mouseDown(this.signature).perform();
+
+        return browser.actions().mouseMove(this.signature, {
+           x: 500,
+           y: 50
+        }).perform();       
     }
 }
