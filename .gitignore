@@ -1,0 +1,9 @@
+/dist
+.idea
+node_modules
+log/*
+.vscode
+.env
+test-results.xml
+cucumber_report.json
+cucumber_report.xml
